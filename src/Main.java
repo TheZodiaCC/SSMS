@@ -1,5 +1,3 @@
-import ssms.DBConnection;
-
 import javax.swing.*;
 import java.sql.SQLException;
 

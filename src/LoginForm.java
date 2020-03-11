@@ -25,12 +25,17 @@ public class LoginForm extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 //DBConnection dbConnection = new DBConnection("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
                 //dbConnection.connect();
-                DBConnection.connect("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
+                DBConnection.connect("jdbc:mysql://localhost:3306/shop", textField1.getText(), passwordField1.getText());
 
-                if(DBConnection.connected)
+                if(DBConnection.getConnected())
                 {
                     dispose();
-                    Content content = new Content();
+                    Content content = null;
+                    try {
+                        content = new Content();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     content.setVisible(true);
                     content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }

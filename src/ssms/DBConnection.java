@@ -6,7 +6,7 @@ public class DBConnection {
     private static String USER;
     private static String PASS;
     private static Connection con = null;
-    public static boolean connected = false;
+    private static boolean connected = false;
 
     //public DBConnection(String DB, String U, String P)
     //{
@@ -18,6 +18,16 @@ public class DBConnection {
     public static String getUSER()
     {
         return USER;
+    }
+
+    public static boolean getConnected()
+    {
+        return connected;
+    }
+
+    public static Connection getCon()
+    {
+        return con;
     }
 
     public static void connect(String db_url, String user, String pass) {
