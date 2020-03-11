@@ -1,6 +1,7 @@
 package ssms;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,84 +46,16 @@ public class DBStatement {
         return customer;
     }
 
-    public static JList<String> getID() throws SQLException {
+    public static void putIntable(DefaultTableModel model) throws SQLException {
 
-        DefaultListModel<String> listID = new DefaultListModel<>();
-
-        for(Customer cust: getCustomer())
+        for(Customer cust : getCustomer())
         {
-            listID.addElement(cust.getId());
-            //System.out.println(cust.getId());
+            model.addRow(new Object[]{cust.getId(), cust.getName(), cust.getPhone(), cust.getEmail(), cust.getStatus()});
         }
-
-        JList<String> listOfID = new JList<>(listID);
-        listOfID.setBounds(0,0, 150,75);
-
-        return listOfID;
     }
 
-    public static JList<String> getName() throws SQLException {
-
-        DefaultListModel<String> listName = new DefaultListModel<>();
-
-        for(Customer cust: getCustomer())
-        {
-            listName.addElement(cust.getName());
-            //System.out.println(cust.getName());
-        }
-
-        JList<String> listOfName = new JList<>(listName);
-        listOfName.setBounds(0,0, 150,75);
-
-        return listOfName;
+    public static void refreashTable(DefaultTableModel model) throws SQLException {
+        model.setRowCount(0);
+        putIntable(model);
     }
-
-    public static JList<String> getPhone() throws SQLException {
-
-        DefaultListModel<String> listPhone = new DefaultListModel<>();
-
-        for(Customer cust: getCustomer())
-        {
-            listPhone.addElement(cust.getPhone());
-            //System.out.println(cust.getPhone());
-        }
-
-        JList<String> listOfPhone = new JList<>(listPhone);
-        listOfPhone.setBounds(0,0, 150,75);
-
-        return listOfPhone;
-    }
-
-    public static JList<String> getEmail() throws SQLException {
-
-        DefaultListModel<String> listEmail = new DefaultListModel<>();
-
-        for(Customer cust: getCustomer())
-        {
-            listEmail.addElement(cust.getEmail());
-            //System.out.println(cust.getEmail());
-        }
-
-        JList<String> listOfEmail = new JList<>(listEmail);
-        listOfEmail.setBounds(0,0, 150,75);
-
-        return listOfEmail;
-    }
-
-    public static JList<String> getStatus() throws SQLException {
-
-        DefaultListModel<String> listStatus = new DefaultListModel<>();
-
-        for(Customer cust: getCustomer())
-        {
-            listStatus.addElement(cust.getStatus());
-            //System.out.println(cust.getStatus());
-        }
-
-        JList<String> listOfStatus = new JList<>(listStatus);
-        listOfStatus.setBounds(0,0, 150,75);
-
-        return listOfStatus;
-    }
-
 }

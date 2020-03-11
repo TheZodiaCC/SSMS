@@ -2,6 +2,7 @@ import ssms.DBConnection;
 import ssms.DBStatement;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -10,15 +11,12 @@ public class Content extends JFrame {
     private JPanel panel1;
     private JButton logout;
     private JLabel loggedAs;
-    private JList customers_id;
-    private JList customers_name;
-    private JList customers_phone;
-    private JList customers_email;
-    private JList customers_status;
     private JButton addCustomerButton;
     private JButton removeCustomerButton;
     private JButton detailsButton;
     private JButton refreashButton;
+    private JTable customersTable;
+
 
     public Content() throws SQLException {
 
@@ -30,17 +28,15 @@ public class Content extends JFrame {
         setUndecorated(true);
         loggedAs.setText("Logged as " + DBConnection.getUSER());
 
-        customers_id.add(DBStatement.getID());
-        customers_id.setVisible(true);
-        customers_name.add(DBStatement.getName());
-        customers_name.setVisible(true);
-        customers_phone.add(DBStatement.getPhone());
-        customers_phone.setVisible(true);
-        customers_email.add(DBStatement.getEmail());
-        customers_email.setVisible(true);
-        customers_status.add(DBStatement.getStatus());
-        customers_status.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
 
+        model.addColumn("Customer ID");
+        model.addColumn("Customer Name");
+        model.addColumn("Customer Phone");
+        model.addColumn("Customer Email");
+        model.addColumn("Customer Status");
+
+        DBStatement.putIntable(model);
 
         logout.addActionListener(new ActionListener() {
             @Override
@@ -58,17 +54,7 @@ public class Content extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    customers_id.removeAll();
-                    customers_name.removeAll();
-                    customers_phone.removeAll();
-                    customers_email.removeAll();
-                    customers_status.removeAll();
-                    System.out.println("Cleared");
-                    customers_id.add(DBStatement.getID());
-                    customers_name.add(DBStatement.getName());
-                    customers_phone.add(DBStatement.getPhone());
-                    customers_email.add(DBStatement.getEmail());
-                    customers_status.add(DBStatement.getStatus());
+                    DBStatement.refreashTable(model);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
