@@ -38,7 +38,7 @@ public class DBStatement {
             String status = resultSet.getString("status");
 
             customer.add(new Customer(id, name, phone, email, status));
-            System.out.println("Added " + name);
+            //System.out.println("Added " + name);
         }
         resultSet.close();
         closeStatement();

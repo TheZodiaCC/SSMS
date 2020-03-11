@@ -15,6 +15,10 @@ public class Content extends JFrame {
     private JList customers_phone;
     private JList customers_email;
     private JList customers_status;
+    private JButton addCustomerButton;
+    private JButton removeCustomerButton;
+    private JButton detailsButton;
+    private JButton refreashButton;
 
     public Content() throws SQLException {
         add(panel1);
