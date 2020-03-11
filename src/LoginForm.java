@@ -33,11 +33,11 @@ public class LoginForm extends JFrame {
                     Content content = null;
                     try {
                         content = new Content();
+                        content.setVisible(true);
+                        content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    content.setVisible(true);
-                    content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }
                 else {
                     login_att.setText("Can't log in");

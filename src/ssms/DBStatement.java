@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class DBStatement {
 
     private static Statement statement = null;
-    private static ArrayList<Customer> customer = new ArrayList<>();
 
     private static void createStatement() throws SQLException {
         if(DBConnection.getConnected())
@@ -38,7 +37,7 @@ public class DBStatement {
             String status = resultSet.getString("status");
 
             customer.add(new Customer(id, name, phone, email, status));
-            //System.out.println("Added " + name);
+            System.out.println("Added " + name);
         }
         resultSet.close();
         closeStatement();

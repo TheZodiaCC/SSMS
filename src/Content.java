@@ -21,6 +21,7 @@ public class Content extends JFrame {
     private JButton refreashButton;
 
     public Content() throws SQLException {
+
         add(panel1);
 
         setTitle("SSMS - Content");
@@ -40,7 +41,6 @@ public class Content extends JFrame {
         customers_status.add(DBStatement.getStatus());
         customers_status.setVisible(true);
 
-        //DBStatement.getCustomer();
 
         logout.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +48,27 @@ public class Content extends JFrame {
                 try {
                     DBConnection.closeConnection();
                     dispose();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        refreashButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    customers_id.removeAll();
+                    customers_name.removeAll();
+                    customers_phone.removeAll();
+                    customers_email.removeAll();
+                    customers_status.removeAll();
+                    System.out.println("Cleared");
+                    customers_id.add(DBStatement.getID());
+                    customers_name.add(DBStatement.getName());
+                    customers_phone.add(DBStatement.getPhone());
+                    customers_email.add(DBStatement.getEmail());
+                    customers_status.add(DBStatement.getStatus());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
