@@ -12,8 +12,10 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+
                 LoginForm loginForm = new LoginForm();
                 loginForm.setVisible(true);
+
                 loginForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });

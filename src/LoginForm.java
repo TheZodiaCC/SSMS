@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import ssms.DBConnection;
 
+
 public class LoginForm extends JFrame {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton loginButton;
     private JPanel rootPanel;
+    private JLabel login_att;
 
     public LoginForm()
     {
@@ -21,13 +23,19 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DBConnection dbConnection = new DBConnection("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
-                dbConnection.connect();
+                //DBConnection dbConnection = new DBConnection("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
+                //dbConnection.connect();
+                DBConnection.connect("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
 
-                try {
-                    dbConnection.closeConnection();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if(DBConnection.connected)
+                {
+                    dispose();
+                    Content content = new Content();
+                    content.setVisible(true);
+                    content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                }
+                else {
+                    login_att.setText("Can't log in");
                 }
             }
         });
