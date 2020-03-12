@@ -16,6 +16,7 @@ public class Content extends JFrame {
     private JButton detailsButton;
     private JButton refreashButton;
     private JTable customersTable;
+    private JScrollPane scrollPan;
 
 
     public Content() throws SQLException {
@@ -36,7 +37,10 @@ public class Content extends JFrame {
 
         //customersTable.setCellSelectionEnabled(false);
         //customersTable.setEnabled(false);
+
         customersTable.setDefaultEditor(Object.class, null);
+
+        scrollPan.setViewportView(customersTable);
 
         DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
 
