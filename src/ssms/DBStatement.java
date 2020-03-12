@@ -22,6 +22,11 @@ public class DBStatement {
         statement.close();
     }
 
+    public static void loginLog(String user, String hour, String date) throws SQLException {
+        createStatement();
+        statement.executeUpdate("INSERT INTO logins (`login_ID`, `user`, `date`, `hour`) VALUES (NULL, '" + user + "', '" + date + "', '" + hour + "');");
+    }
+
     private static ArrayList<Customer> getCustomer() throws SQLException {
 
         createStatement();
