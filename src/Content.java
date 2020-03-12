@@ -28,6 +28,16 @@ public class Content extends JFrame {
         setUndecorated(true);
         loggedAs.setText("Logged as " + DBConnection.getUSER());
 
+        //customersTable = new JTable() {
+        //    public boolean editCellAt(int row, int column, java.util.EventObject e) {
+        //        return false;
+        //    }
+        //};
+
+        //customersTable.setCellSelectionEnabled(false);
+        //customersTable.setEnabled(false);
+        customersTable.setDefaultEditor(Object.class, null);
+
         DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
 
         model.addColumn("Customer ID");
