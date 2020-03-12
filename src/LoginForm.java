@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import ssms.DBConnection;
 import ssms.DBStatement;
@@ -31,15 +30,8 @@ public class LoginForm extends JFrame {
 
                 if(DBConnection.getConnected())
                 {
-                    Calendar calendar = Calendar.getInstance();
-                    String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
-                    String mins = String.valueOf(calendar.get(Calendar.MINUTE));
-                    String date_day = String.valueOf(calendar.get(Calendar.DATE));
-                    String date_month = String.valueOf((calendar.get(Calendar.MONTH))+1);
-                    String date_year = String.valueOf(calendar.get(Calendar.YEAR));
-
                     try {
-                        DBStatement.loginLog(textField1.getText(), hour + ":" + mins, date_day + "-" + date_month + "-" + date_year);
+                        DBStatement.loginLog(textField1.getText());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

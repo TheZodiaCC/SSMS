@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DBStatement {
 
@@ -22,9 +23,20 @@ public class DBStatement {
         statement.close();
     }
 
-    public static void loginLog(String user, String hour, String date) throws SQLException {
+    public static void loginLog(String user) throws SQLException {
+
+        Calendar calendar = Calendar.getInstance();
+        /*String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
+        String mins = String.valueOf(calendar.get(Calendar.MINUTE));
+        String date_day = String.valueOf(calendar.get(Calendar.DATE));
+        String date_month = String.valueOf((calendar.get(Calendar.MONTH))+1);
+        String date_year = String.valueOf(calendar.get(Calendar.YEAR));*/
+
+        String currHour =  String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
+        String currDate = String.valueOf(calendar.get(Calendar.DATE)) + "-" + String.valueOf((calendar.get(Calendar.MONTH))+1) + "-" + String.valueOf(calendar.get(Calendar.YEAR));
+
         createStatement();
-        statement.executeUpdate("INSERT INTO logins (`login_ID`, `user`, `date`, `hour`) VALUES (NULL, '" + user + "', '" + date + "', '" + hour + "');");
+        statement.executeUpdate("INSERT INTO logins (`login_ID`, `user`, `date`, `hour`) VALUES (NULL, '" + user + "', '" + currDate + "', '" + currHour + "');");
     }
 
     private static ArrayList<Customer> getCustomer() throws SQLException {
