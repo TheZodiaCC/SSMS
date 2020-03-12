@@ -24,9 +24,7 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //DBConnection dbConnection = new DBConnection("jdbc:mysql://localhost:3306/flas", textField1.getText(), passwordField1.getText());
-                //dbConnection.connect();
-                DBConnection.connect("jdbc:mysql://localhost:3306/shop", textField1.getText(), passwordField1.getText());
+                DBConnection.connect("jdbc:mysql://localhost:3306/shop", textField1.getText(), new String(passwordField1.getPassword()));
 
                 if(DBConnection.getConnected())
                 {
