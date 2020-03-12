@@ -23,28 +23,30 @@ public class DBStatement {
         statement.close();
     }
 
+    public static void searchByName(String name) throws SQLException {
+        createStatement();
+
+        closeStatement();
+    }
+
     public static void loginLog(String user) throws SQLException {
 
         Calendar calendar = Calendar.getInstance();
-        /*String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
-        String mins = String.valueOf(calendar.get(Calendar.MINUTE));
-        String date_day = String.valueOf(calendar.get(Calendar.DATE));
-        String date_month = String.valueOf((calendar.get(Calendar.MONTH))+1);
-        String date_year = String.valueOf(calendar.get(Calendar.YEAR));*/
 
         String currHour =  String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
         String currDate = String.valueOf(calendar.get(Calendar.DATE)) + "-" + String.valueOf((calendar.get(Calendar.MONTH))+1) + "-" + String.valueOf(calendar.get(Calendar.YEAR));
 
         createStatement();
         statement.executeUpdate("INSERT INTO logins (`login_ID`, `user`, `date`, `hour`) VALUES (NULL, '" + user + "', '" + currDate + "', '" + currHour + "');");
+        closeStatement();
     }
 
-    private static ArrayList<Customer> getCustomer() throws SQLException {
+    private static ArrayList<Customer> getCustomer(String query) throws SQLException {
 
         createStatement();
 
         ArrayList<Customer> customer = new ArrayList<>();
-        ResultSet resultSet = statement.executeQuery("SELECT customer_id, name, phone, email, status FROM customers");
+        ResultSet resultSet = statement.executeQuery(query);
 
         while(resultSet.next())
         {
@@ -63,16 +65,16 @@ public class DBStatement {
         return customer;
     }
 
-    public static void putIntable(DefaultTableModel model) throws SQLException {
+    public static void putIntable(DefaultTableModel model, String query) throws SQLException {
 
-        for(Customer cust : getCustomer())
+        for(Customer cust : getCustomer(query))
         {
             model.addRow(new Object[]{cust.getId(), cust.getName(), cust.getPhone(), cust.getEmail(), cust.getStatus()});
         }
     }
 
-    public static void refreashTable(DefaultTableModel model) throws SQLException {
+    public static void refreashTable(DefaultTableModel model, String query) throws SQLException {
         model.setRowCount(0);
-        putIntable(model);
+        putIntable(model, query);
     }
 }

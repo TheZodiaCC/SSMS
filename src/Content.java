@@ -17,6 +17,8 @@ public class Content extends JFrame {
     private JButton refreashButton;
     private JTable customersTable;
     private JScrollPane scrollPan;
+    private JTextField nameTextField;
+    private JButton searchButton;
 
 
     public Content() throws SQLException {
@@ -28,15 +30,6 @@ public class Content extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         loggedAs.setText("Logged as " + DBConnection.getUSER());
-
-        //customersTable = new JTable() {
-        //    public boolean editCellAt(int row, int column, java.util.EventObject e) {
-        //        return false;
-        //    }
-        //};
-
-        //customersTable.setCellSelectionEnabled(false);
-        //customersTable.setEnabled(false);
 
         customersTable.setDefaultEditor(Object.class, null);
 
@@ -50,7 +43,7 @@ public class Content extends JFrame {
         model.addColumn("Customer Email");
         model.addColumn("Customer Status");
 
-        DBStatement.putIntable(model);
+        DBStatement.putIntable(model, "SELECT customer_id, name, phone, email, status FROM customers");
 
         logout.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +61,7 @@ public class Content extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    DBStatement.refreashTable(model);
+                    DBStatement.refreashTable(model, "SELECT customer_id, name, phone, email, status FROM customers");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
