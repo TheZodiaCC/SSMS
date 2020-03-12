@@ -78,7 +78,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Name"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="2ce11" class="javax.swing.JButton" binding="searchButton" default-binding="true">

@@ -23,8 +23,13 @@ public class DBStatement {
         statement.close();
     }
 
-    public static void searchByName(String name) throws SQLException {
+    public static void searchByName(String search, DefaultTableModel model) throws SQLException {
         createStatement();
+
+        String query = "SELECT customer_id, name, phone, email, status FROM customers WHERE name='"+search + "' OR phone='"+search + "' OR email='"+search + "' OR status='"+search + "'";
+
+        model.setRowCount(0);
+        putIntable(model, query);
 
         closeStatement();
     }

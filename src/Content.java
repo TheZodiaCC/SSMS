@@ -67,5 +67,16 @@ public class Content extends JFrame {
                 }
             }
         });
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    DBStatement.searchByName(nameTextField.getText(), model);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
