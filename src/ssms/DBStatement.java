@@ -23,6 +23,13 @@ public class DBStatement {
         statement.close();
     }
 
+    public static void removeCustomer(int id) throws SQLException {
+        createStatement();
+        String query = "DELETE FROM `customers` WHERE `customer_id` =" + id;
+        statement.executeUpdate(query);
+        closeStatement();
+    }
+
     public static void searchByName(String search, DefaultTableModel model) throws SQLException {
         createStatement();
 

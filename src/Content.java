@@ -78,5 +78,19 @@ public class Content extends JFrame {
                 }
             }
         });
+
+        removeCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int id = Integer.parseInt(customersTable.getValueAt(customersTable.getSelectedRow(), 0).toString());
+                try {
+                    DBStatement.removeCustomer(id);
+                    DBStatement.refreashTable(model, "SELECT customer_id, name, phone, email, status FROM customers");
+                } catch (SQLException e) {
+                    //Causes when user doesnt have permission to Delete
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
