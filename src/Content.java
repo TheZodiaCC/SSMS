@@ -92,5 +92,14 @@ public class Content extends JFrame {
                 }
             }
         });
+
+        addCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addUserForm addUser = new addUserForm();
+                addUser.setVisible(true);
+                addUser.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
     }
 }
