@@ -73,6 +73,7 @@ public class Content extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     DBStatement.searchByName(nameTextField.getText(), model);
+                    nameTextField.setText("");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
