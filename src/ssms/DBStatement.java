@@ -1,12 +1,13 @@
 package ssms;
 
-import javax.swing.*;
+
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 
 public class DBStatement {
 
@@ -88,5 +89,11 @@ public class DBStatement {
     public static void refreashTable(DefaultTableModel model, String query) throws SQLException {
         model.setRowCount(0);
         putIntable(model, query);
+    }
+
+    public static void addCustomer(String name, String phone, String email, String status) throws SQLException {
+        createStatement();
+        statement.executeUpdate("INSERT INTO customers (`customer_id`, `name`, `phone`, `email`, `status`) VALUES (NULL, '" + name + "', '" + phone + "', '" + email + "', '" + status + "');");
+        closeStatement();
     }
 }
