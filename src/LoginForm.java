@@ -19,7 +19,7 @@ public class LoginForm extends JFrame {
         add(rootPanel);
 
         setTitle("SSMS - Login");
-        setSize(400, 400);
+        setSize(400, 250);
 
         loginButton.addActionListener(new ActionListener() {
             @Override

@@ -96,4 +96,10 @@ public class DBStatement {
         statement.executeUpdate("INSERT INTO customers (`customer_id`, `name`, `phone`, `email`, `status`) VALUES (NULL, '" + name + "', '" + phone + "', '" + email + "', '" + status + "');");
         closeStatement();
     }
+
+    public static void updateCustomer(int id, String name, String phone, String email, String status) throws SQLException {
+        createStatement();
+        statement.executeUpdate("UPDATE `customers` SET `name` = '" + name + "', `phone` = '" + phone + "', `email` = '" + email + "', `status` = '" + status + "' WHERE `customer_id` = " + id + ";");
+        closeStatement();
+    }
 }

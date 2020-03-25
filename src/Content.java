@@ -13,7 +13,7 @@ public class Content extends JFrame {
     private JLabel loggedAs;
     private JButton addCustomerButton;
     private JButton removeCustomerButton;
-    private JButton detailsButton;
+    private JButton editButton;
     private JButton refreashButton;
     private JTable customersTable;
     private JScrollPane scrollPan;
@@ -88,9 +88,24 @@ public class Content extends JFrame {
                     DBStatement.removeCustomer(id);
                     DBStatement.refreashTable(model, "SELECT customer_id, name, phone, email, status FROM customers");
                 } catch (SQLException e) {
-                    //Causes when user doesnt have permission to Delete
+                    //Happens when user doesnt have permission to Delete
                     e.printStackTrace();
                 }
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int id = Integer.parseInt(customersTable.getValueAt(customersTable.getSelectedRow(), 0).toString());
+                String name = customersTable.getValueAt(customersTable.getSelectedRow(), 1).toString();
+                String phone = customersTable.getValueAt(customersTable.getSelectedRow(), 2).toString();
+                String email = customersTable.getValueAt(customersTable.getSelectedRow(), 3).toString();
+                String status = customersTable.getValueAt(customersTable.getSelectedRow(), 4).toString();
+
+                editCustomer editCustomer = new editCustomer(id, name, phone, email, status);
+                editCustomer.setVisible(true);
+                editCustomer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
 
