@@ -2,7 +2,9 @@
 Simple Shop Management System
 
 Software to manage customers data
-<br/><br/>
+<br/>
+Needs JDBC to work
+<br/>
 <br/>
 Add new customer Form
 <br/>
